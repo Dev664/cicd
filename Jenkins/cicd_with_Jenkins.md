@@ -19,6 +19,13 @@ https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
 
 craete an Ec2 instance with the below specifications 
 
+use the same Security group as k8s cluster else open the below ports on your SG 
+22  SSH
+8080  Jenkins UI 
+30000–32767 NodePort (for K8s apps)
+
+instance Type : t2.medium Storage : Minimum: 20 GB
+
 
 Install Java 
 ```
