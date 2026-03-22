@@ -2,37 +2,50 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB = "your-dockerhub-username"
-        IMAGE = "cicd-app"
+        DOCKER_IMAGE = "doc201/flask-app"
+        TAG = "${BUILD_NUMBER}"
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
 
     stages {
 
         stage('Clone Code') {
             steps {
-                git 'https://github.com/<your-repo>.git'
+                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/Dev664/test_cicd.git'
             }
         }
 
         stage('Build Image') {
             steps {
-                sh 'docker build -t $DOCKERHUB/$IMAGE:latest .'
+                sh '''
+                docker build -t $DOCKER_IMAGE:$TAG .
+                '''
             }
         }
 
         stage('Push Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh 'docker login -u $USER -p $PASS'
-                    sh 'docker push $DOCKERHUB/$IMAGE:latest'
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'USER',
+                    passwordVariable: 'PASS'
+                )]) {
+                    sh '''
+                    echo $PASS | docker login -u $USER --password-stdin
+                    docker push $DOCKER_IMAGE:$TAG
+                    '''
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to K8s') {
             steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl rollout restart deployment cicd-app'
+                sh '''
+                kubectl set image deployment/flask-deployment \
+                flask=$DOCKER_IMAGE:$TAG
+
+                kubectl rollout status deployment/flask-deployment
+                '''
             }
         }
     }
