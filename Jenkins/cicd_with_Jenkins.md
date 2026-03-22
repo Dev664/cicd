@@ -123,8 +123,33 @@ service.yaml
 Open Jenkins UI  : http://<jenkins-ec2-ip>:8080 
 login as admin 
 
- Go to Credentials  from settings  
- Select Store 
- Add Credentials 
- Username with password
+Go to Credentials  from settings  
+  Select Store 
+  Add Credentials 
+  Username with password
+
+ ## Jenkins Pipeline Setup 
+
+### Install Required Plugins 
+
+Verify and if not required Install: 
+Pipeline  (this should already available , just search ) 
+Git  (this should already available , just search ) 
+Docker Pipeline  (This need to install) 
+
+### Create Pipeline Job 
+
+### create the pipeline config file / jenkins file 
+
+### Run the build 
+
+
+## Test the CI/CD workflow 
+
+### Modify the app.py from gitbash
+push it 
+
+### setuip Setup Webhook for auto build and deploy 
+
+
 
