@@ -11,7 +11,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/Dev664/test_cicd.git'
+                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/Dev664/<repo>'
             }
         }
 
