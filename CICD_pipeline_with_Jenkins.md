@@ -502,4 +502,4 @@ The entire software delivery process becomes fully automated.
 
 **Debdip Ghosh**
 
-DevOps Engineer | CI/CD | Docker | Kubernetes | Jenkins | Cloud Automation
+DevOps Engineer 
