@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'chmod +x system-info.sh'
-                sh './system-info.sh > system-info.txt'
+                sh 'sh system-info.sh > system-info.txt'
             }
         }
 
