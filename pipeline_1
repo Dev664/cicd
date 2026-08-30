@@ -1,0 +1,16 @@
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('System Information') {
+            steps {
+                sh 'cat /etc/os-release'
+                sh 'uname -r'
+                sh 'hostname'
+            }
+        }
+
+    }
+}
