@@ -1,0 +1,31 @@
+pipeline {
+
+    agent {
+        docker {
+            image 'python:3.12-alpine'
+        }
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                sh 'python --version'
+                sh 'pip --version'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'python -c "print(2 + 2)"'
+                sh 'echo "Tests completed successfully"'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'echo "Deploying Python application..."'
+            }
+        }
+    }
+}
