@@ -7,7 +7,6 @@ pipeline {
         stage('Run Linux Script') {
             steps {
                 sh 'pwd'
-                sh 'chmod +x system-info.sh'
                 sh 'sh system-info.sh > system-info.txt'
             }
         }
