@@ -1,0 +1,20 @@
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Run Linux Script') {
+            steps {
+                sh 'chmod +x system-info.sh'
+                sh './system-info.sh > system-info.txt'
+            }
+        }
+
+        stage('Store Result') {
+            steps {
+                sh 'cp system-info.txt /tmp/system-info.txt'
+            }
+        }
+    }
+}
